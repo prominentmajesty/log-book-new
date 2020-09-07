@@ -4,6 +4,7 @@ var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var teacher = require('./routes/teacher');
 var connector = require('./dataBase/config');
 
 var app = express();
@@ -33,6 +34,7 @@ app.use(bodyparser.urlencoded({extended :false}));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/teacher', teacher);
 
 app.listen(port, ()=>{
     console.log(`Cool !! app is Up and running @ port ${port}`);
