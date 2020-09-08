@@ -1,5 +1,4 @@
 <!-- https://freefrontend.com/bootstrap-login-forms/ -->
-<header class="header">
     <nav class="navbar navbar-expand-lg navbar-light py-3">
         <div class="container">
             <!-- Navbar Brand -->
@@ -8,7 +7,6 @@
             </a>
         </div>
     </nav>
-</header>
 <div class="container">
     <div class="row py-5 mt-4 align-items-center">
         <!-- For Demo Purpose -->
@@ -22,11 +20,11 @@
         </div>
 
         <!-- Registeration Form -->
-        <div class="col-md-7 col-lg-6 ml-auto f_f">
+        <div class="col-md-7 col-lg-6 ml-auto f_f" id="f_curse_adviser">
             <div class="teacher_text text-center pb-4">
                 <h4 class="_text"> Log in! Curse Adviser</h4>
             </div> 
-            <form name="curse_adviser" id="curse_adviser" class="curse_adviser" action="#">
+            <form name="curse_adviser" id="curse_adviser" class="curse_adviser">
                 <div class="row">
 
                     <!-- First Name -->
@@ -55,7 +53,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                    
@@ -98,7 +96,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="password" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     
@@ -137,7 +135,7 @@
 
                     <!-- Already Registered -->
                     <div class="text-center w-100">
-                        <p class="text-muted font-weight-bold">Are you an admin? <a href="#" class="text-primary ml-2">Login</a></p>
+                        <p class="text-muted font-weight-bold">Are you an admin? <button type="button" class="btn btn-primary btn-sm" id="btn_adviser_navigator">Login</button></p>
                     </div>
 
                 </div>
@@ -147,9 +145,9 @@
         <!-- Log in form for admin -->
         <div class="col-md-7 col-lg-6 ml-auto f_f" id="f_admin">
             <div class="teacher_text text-center pb-4">
-                <h4 class="_text"> Log in! Curse Adviser</h4>
+                <h4 class="_text"> Log in! Admistrator</h4>
             </div> 
-            <form name="admin_login" id="admin_login" class="admin_login" action="#">
+            <form name="admin_login" id="admin_login" class="admin_login">
                 <div class="row">
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
@@ -157,7 +155,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email" type="email" name="email" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input id="email_admin" type="email" name="email_admin" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
                     </div>
                 
 
@@ -167,7 +165,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="password_admin" type="password" name="password_admin" placeholder="Password" class="form-control bg-white border-left-0 border-md">
                     </div>
 
                     <!-- Submit Button -->
@@ -185,8 +183,130 @@
                     </div>
 
                     <div class="text-center w-100">
-                        <p class="text-muted font-weight-bold">Are you an admin? <a href="#" class="text-primary ml-2">Login</a></p>
+                        <p class="text-muted font-weight-bold">Are you a curse adviser? <button type="button" class="btn btn-primary btn-sm" id="btn_admin_navigator">Login</button></p>
                     </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Registeration Form for Qualified Students -->
+        <div class="col-md-7 col-lg-6 ml-auto f_f" id="qualified_students">
+            <div class="teacher_text text-center pb-4">
+                <h4 class="_text"> Log in! Curse Adviser</h4>
+            </div> 
+            <form name="qualified_student_form" id="qualified_student_form" class="qualified_student_form">
+                <div class="row">
+                    <!-- First Name -->
+                     <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user text-muted"></i>
+                            </span>
+                        </div>
+                        <input id="firstName" type="text" name="firstname" placeholder="First Name" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
+                     <!-- Last Name -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user text-muted"></i>
+                            </span>
+                        </div>
+                        <input id="lastName" type="text" name="lastname" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
+                    </div> 
+
+                    <!-- Email Address -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-envelope text-muted"></i>
+                            </span>
+                        </div>
+                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
+                   <!-- Phone Number -->
+                   <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-phone-square text-muted"></i>
+                            </span>
+                        </div>
+                        <select id="countryCode" name="countryCode" style="max-width: 80px" class="custom-select form-control bg-white border-left-0 border-md h-100 font-weight-bold text-muted">
+                            <option value="">+12</option>
+                            <option value="">+10</option>
+                            <option value="">+15</option>
+                            <option value="">+18</option>
+                        </select>
+                        <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
+                    </div>  
+                   
+                    <!-- Job -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-black-tie text-muted"></i>
+                            </span>
+                        </div>
+                        <select id="job" name="jobtitle" class="form-control custom-select bg-white border-left-0 border-md">
+                            <option value="">Choose your job</option>
+                            <option value="">Designer</option>
+                            <option value="">Developer</option>
+                            <option value="">Manager</option>
+                            <option value="">Accountant</option>
+                        </select>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
+                    <!-- Password Confirmation -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input id="passwordConfirmation" type="text" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
+                    </div> 
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Log in with your credencials</button>
+                    </div>
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="form-group col-lg-12 mx-auto">
+                        <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
+                            <i class="fa fa-facebook-f mr-2"></i>
+                            <span class="font-weight-bold">Continue with Facebook</span>
+                        </a>
+                        <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+                            <i class="fa fa-twitter mr-2"></i>
+                            <span class="font-weight-bold">Continue with Twitter</span>
+                        </a>
+                    </div>
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">Are you an admin? <button type="button" class="btn btn-primary btn-sm" id="btn_adviser_navigator">Login</button></p>
+                    </div>
+
                 </div>
             </form>
         </div>

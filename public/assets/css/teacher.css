@@ -57,9 +57,9 @@ select.form-control {
     padding-top:60px;
     padding-bottom: 25px;
 }
-._text{
+/*._text{
     font-family: 'Source Code Pro', monospace;
-}
+}*/
 @media (max-width: 541px) { 
     .f_f{
         border: none !important;
