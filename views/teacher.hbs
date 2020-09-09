@@ -1,3 +1,15 @@
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container" id="id_brd">
+
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li id="f_f_f">Form</li>
+        </ol>
+        <a href="/"><img src="/assets/img/favicon.png"></a>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
 <!-- https://freefrontend.com/bootstrap-login-forms/ -->
     <nav class="navbar navbar-expand-lg navbar-light py-3">
         <div class="container">
@@ -53,7 +65,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md" autocomplete="current-password">
                     </div>
 
                    
@@ -96,7 +108,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md" autocomplete="current-password">
                     </div>
 
                     
@@ -111,7 +123,7 @@
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Log in with your credencials</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="curse_adviser_submit_btn">Log in with your credencials</button>
                     </div>
 
                     <!-- Divider Text -->
@@ -170,9 +182,7 @@
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
-                        <a href="#" class="btn btn-primary btn-block py-2">
-                            <span class="font-weight-bold">Log in with your credencials</span>
-                        </a>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="admin_submit_btn">Log in with your credencials</button>
                     </div>
 
                     <!-- Divider Text -->
@@ -192,7 +202,7 @@
         <!-- Registeration Form for Qualified Students -->
         <div class="col-md-7 col-lg-6 ml-auto f_f" id="qualified_students">
             <div class="teacher_text text-center pb-4">
-                <h4 class="_text"> Log in! Curse Adviser</h4>
+                <h4 class="_text"> Qualified student registration form</h4>
             </div> 
             <form name="qualified_student_form" id="qualified_student_form" class="qualified_student_form">
                 <div class="row">
@@ -203,7 +213,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="firstName" type="text" name="firstname" placeholder="First Name" class="form-control bg-white border-left-0 border-md">
+                        <input id="student_first_name" type="text" name="first_name" placeholder="Surname" class="form-control bg-white border-left-0 border-md" required>
                     </div>
 
                      <!-- Last Name -->
@@ -213,7 +223,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="lastName" type="text" name="lastname" placeholder="Last Name" class="form-control bg-white border-left-0 border-md">
+                        <input id="student_last_name" type="text" name="last_name" placeholder="Other Names" class="form-control bg-white border-left-0 border-md" required>
                     </div> 
 
                     <!-- Email Address -->
@@ -223,8 +233,18 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md">
+                        <input id="student_email" type="email" name="email" placeholder="Student Email Address" class="form-control bg-white border-left-0 border-md" required>
                     </div>
+
+                    <!-- Registration Number-->
+                    <div class="input-group col-lg-12 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted"></i>
+                            </span>
+                        </div>
+                        <input type="text" id="student_reg_number" name="reg_no" placeholder="Registration Number" class="form-control bg-white border-left-0 border-md" required>
+                    </div>  
 
                    <!-- Phone Number -->
                    <div class="input-group col-lg-12 mb-4">
@@ -234,49 +254,51 @@
                             </span>
                         </div>
                         <select id="countryCode" name="countryCode" style="max-width: 80px" class="custom-select form-control bg-white border-left-0 border-md h-100 font-weight-bold text-muted">
-                            <option value="">+12</option>
-                            <option value="">+10</option>
-                            <option value="">+15</option>
-                            <option value="">+18</option>
+                            <option value="">+234</option>
+                            <option value="">+127</option>
+                            <option value="">+444</option>
+                            <option value="">+223</option>
                         </select>
-                        <input id="phoneNumber" type="tel" name="phone" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3">
+                        <input id="student_phone_number" type="text" name="phone_number" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3" required>
                     </div>  
                    
                     <!-- Job -->
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                <i class="fa fa-black-tie text-muted"></i>
+                                <i class="fa fa-graduation-cap text-muted"></i>
                             </span>
                         </div>
-                        <select id="job" name="jobtitle" class="form-control custom-select bg-white border-left-0 border-md">
-                            <option value="">Choose your job</option>
-                            <option value="">Designer</option>
-                            <option value="">Developer</option>
-                            <option value="">Manager</option>
-                            <option value="">Accountant</option>
+                        <select id="college" name="college" class="form-control custom-select bg-white border-left-0 border-md"  required>
+                            <option value="" disabled selected>Collage / Faculty</option>
+                            <option value="COLPAS">COLPAS</option>
+                            <option value="COLMAS">COLMAS</option>
+                            <option value="CAFST">CAFST</option>
+                            <option value="CEET">CEET</option>
+                            <option value="CCSS">CCSS</option>
+                            <option value="VET">VET</option>
+                            <option value="CASE">CASE</option>
+                            <option value="CNREM">CNREM</option>
+                            <option value="CAERSE">CAERSE</option>
+                            <option value="CASAP">CASAP</option>
                         </select>
                     </div>
 
-                    <!-- Password -->
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                <i class="fa fa-lock text-muted"></i>
+                                <i class="fa fa-graduation-cap text-muted"></i>
                             </span>
                         </div>
-                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                        <select id="department" name="department" class="form-control custom-select bg-white border-left-0 border-md" required>
+                            <option value="" disabled selected>department</option>
+                        </select>
                     </div>
 
-                    <!-- Password Confirmation -->
+                    <!-- Date -->
                     <div class="input-group col-lg-6 mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white px-4 border-md border-right-0">
-                                <i class="fa fa-lock text-muted"></i>
-                            </span>
-                        </div>
-                        <input id="passwordConfirmation" type="text" name="passwordConfirmation" placeholder="Confirm Password" class="form-control bg-white border-left-0 border-md">
-                    </div> 
+                        <input type="date" id="datepicker" class="form-control bg-white border-md border-left-0 pl-3" required>
+                    </div>
 
                     <!-- Submit Button -->
                     <div class="form-group col-lg-12 mx-auto mb-0">
@@ -304,7 +326,7 @@
 
                     <!-- Already Registered -->
                     <div class="text-center w-100">
-                        <p class="text-muted font-weight-bold">Are you an admin? <button type="button" class="btn btn-primary btn-sm" id="btn_adviser_navigator">Login</button></p>
+                        <button type="button" class="btn btn-danger btn-sm" id="student_close_form">X CLOSE</button></p>
                     </div>
 
                 </div>
@@ -313,3 +335,4 @@
 
     </div>
 </div>
+{{> footer}}

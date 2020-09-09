@@ -33,6 +33,9 @@
 /*body {
     min-height: 100vh;
 }*/
+.breadcrumbs{
+    margin-top: 0px !important;
+}
 
 .form-control:not(select) {
     padding: 1.5rem 0.5rem;
@@ -41,7 +44,20 @@
 select.form-control {
     height: 52px;
     padding-left: 0.5rem;
+    
 }
+
+#datepicker::placeholder{
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+select:invalid { 
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.9rem;
+ }
 
 .form-control::placeholder {
     color: #ccc;
@@ -60,6 +76,9 @@ select.form-control {
 /*._text{
     font-family: 'Source Code Pro', monospace;
 }*/
+#datepicker{
+    border-left: 2px solid rgb(223, 221, 221) !important;
+}
 @media (max-width: 541px) { 
     .f_f{
         border: none !important;
