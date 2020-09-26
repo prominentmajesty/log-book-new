@@ -1,6 +1,6 @@
-const express = require('express');
+var express = require('express');
 
-const router = express.Router();
+var router = express.Router();
 
 router.get('/users', (req, res) => {
     res.render('users', {
@@ -8,6 +8,5 @@ router.get('/users', (req, res) => {
         style : 'users.css',
         script : 'users.js'
     })
-})
-
+});
 module.exports = router;

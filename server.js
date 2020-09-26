@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var teacher = require('./routes/teacher');
+var admin = require('./routes/admin');
 var connector = require('./dataBase/config');
 
 var app = express();
@@ -17,7 +18,7 @@ mongoose.connect(connector.connector.connector,{
     useCreateIndex : true
 }, () => console.log('Data Base Connected Successfuly')
 );
-
+ 
 app.use(express.static('./public'));
 app.engine('.hbs', exphbs({
     extname : '.hbs',
@@ -35,6 +36,7 @@ app.use(bodyparser.urlencoded({extended :false}));
 app.use('/', index);
 app.use('/users', users);
 app.use('/teacher', teacher);
+app.use('/admin', admin);
 
 app.listen(port, ()=>{
     console.log(`Cool !! app is Up and running @ port ${port}`);

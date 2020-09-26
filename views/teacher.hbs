@@ -36,7 +36,8 @@
             <div class="teacher_text text-center pb-4">
                 <h4 class="_text"> Log in! Curse Adviser</h4>
             </div> 
-            <form name="curse_adviser" id="curse_adviser" class="curse_adviser">
+            <form name="curse_adviser_login_form" id="curse_adviser_login_form" class="curse_adviser_login_form">
+                <div class="alert alert-danger" id="adviser_restrictor_alert" role="alert"></div>
                 <div class="row">
 
                     <!-- First Name -->
@@ -65,7 +66,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md" autocomplete="current-password">
+                        <input id="email_curs_adviser" type="email" name="email_curs_adviser" placeholder="Email Address" class="form-control bg-white border-left-0 border-md general_validator" autocomplete="current-password">
                     </div>
 
                    
@@ -108,7 +109,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md" autocomplete="current-password">
+                        <input id="password_curs_adviser" type="password" name="password_curs_adviser" placeholder="Password" class="form-control bg-white border-left-0 border-md general_validator" autocomplete="current-password">
                     </div>
 
                     
@@ -159,7 +160,8 @@
             <div class="teacher_text text-center pb-4">
                 <h4 class="_text"> Log in! Admistrator</h4>
             </div> 
-            <form name="admin_login" id="admin_login" class="admin_login">
+            <form name="admin_login_form" id="admin_login_form" class="admin_login_form">
+                <div class="alert alert-danger" id="admin_restrictor_alert" role="alert"></div>
                 <div class="row">
                     <div class="input-group col-lg-12 mb-4">
                         <div class="input-group-prepend">
@@ -202,18 +204,20 @@
         <!-- Registeration Form for Qualified Students -->
         <div class="col-md-7 col-lg-6 ml-auto f_f" id="qualified_students">
             <div class="teacher_text text-center pb-4">
-                <h4 class="_text"> Qualified student registration form</h4>
+                <h4 class="_text">Qualified student registration form</h4>
             </div> 
             <form name="qualified_student_form" id="qualified_student_form" class="qualified_student_form">
+                <div class="alert alert-warning" role="alert" id="alert_role"></div>
+                <div class="alert alert-danger" role="alert" id="field_div"></div>
                 <div class="row">
                     <!-- First Name -->
                      <div class="input-group col-lg-6 mb-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                        <div class="input-group-prepend" id="first_name_icon">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0" id="first_name_ic">
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="student_first_name" type="text" name="first_name" placeholder="Surname" class="form-control bg-white border-left-0 border-md" required>
+                        <input id="student_first_name" type="text" name="first_name" placeholder="Surname" class="form-control bg-white border-left-0 border-md add_class">
                     </div>
 
                      <!-- Last Name -->
@@ -223,7 +227,7 @@
                                 <i class="fa fa-user text-muted"></i>
                             </span>
                         </div>
-                        <input id="student_last_name" type="text" name="last_name" placeholder="Other Names" class="form-control bg-white border-left-0 border-md" required>
+                        <input id="student_last_name" type="text" name="last_name" placeholder="Other Names" class="form-control bg-white border-left-0 border-md add_class">
                     </div> 
 
                     <!-- Email Address -->
@@ -233,7 +237,7 @@
                                 <i class="fa fa-envelope text-muted"></i>
                             </span>
                         </div>
-                        <input id="student_email" type="email" name="email" placeholder="Student Email Address" class="form-control bg-white border-left-0 border-md" required>
+                        <input id="student_email" type="email" name="email" placeholder="Student Email Address" class="form-control bg-white border-left-0 border-md add_class">
                     </div>
 
                     <!-- Registration Number-->
@@ -243,7 +247,7 @@
                                 <i class="fa fa-lock text-muted"></i>
                             </span>
                         </div>
-                        <input type="text" id="student_reg_number" name="reg_no" placeholder="Registration Number" class="form-control bg-white border-left-0 border-md" required>
+                        <input type="text" id="student_reg_number" name="reg_no" placeholder="Registration Number" class="form-control bg-white border-left-0 border-md add_class">
                     </div>  
 
                    <!-- Phone Number -->
@@ -259,7 +263,7 @@
                             <option value="">+444</option>
                             <option value="">+223</option>
                         </select>
-                        <input id="student_phone_number" type="text" name="phone_number" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3" required>
+                        <input id="student_phone_number" type="text" name="phone_number" placeholder="Phone Number" class="form-control bg-white border-md border-left-0 pl-3 add_class">
                     </div>  
                    
                     <!-- Job -->
@@ -269,7 +273,7 @@
                                 <i class="fa fa-graduation-cap text-muted"></i>
                             </span>
                         </div>
-                        <select id="college" name="college" class="form-control custom-select bg-white border-left-0 border-md"  required>
+                        <select id="college" name="college" class="form-control custom-select bg-white border-left-0 border-md add_class">
                             <option value="" disabled selected>Collage / Faculty</option>
                             <option value="COLPAS">COLPAS</option>
                             <option value="COLMAS">COLMAS</option>
@@ -290,14 +294,14 @@
                                 <i class="fa fa-graduation-cap text-muted"></i>
                             </span>
                         </div>
-                        <select id="department" name="department" class="form-control custom-select bg-white border-left-0 border-md" required>
+                        <select id="department" name="department" class="form-control custom-select bg-white border-left-0 border-md add_class">
                             <option value="" disabled selected>department</option>
                         </select>
                     </div>
 
                     <!-- Date -->
                     <div class="input-group col-lg-6 mb-4">
-                        <input type="date" id="datepicker" class="form-control bg-white border-md border-left-0 pl-3" required>
+                        <input type="date" id="datepicker" class="form-control bg-white border-md border-left-0 pl-3 add_class">
                     </div>
 
                     <!-- Submit Button -->

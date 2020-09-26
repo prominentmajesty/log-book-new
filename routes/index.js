@@ -1,6 +1,6 @@
-var exprress =  require('express');
+var express =  require('express');
 
-var router = exprress.Router();
+var router = express.Router();
 
 router.get('/', (req, res)=>{
     res.render('home', { 
