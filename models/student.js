@@ -47,7 +47,10 @@ var student_Schema = mongoose.Schema({
         default : false
     },
 
-   
+   status : {
+       type : String,
+       required : true
+   }
 
 });
 

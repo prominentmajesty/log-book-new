@@ -3,17 +3,22 @@ const mongoose = require('mongoose');
 var adviser_Schema = mongoose.Schema({
     email : {
         type : String,
-        require : true
+        required : true
     },
     // password will be university id
     password : {
         type : String,
-        require : true
+        required : true
     },
      
     name :{
         type : String,
-        require : true
+        required : true
+    },
+
+    status : {
+        type : String,
+        required : true
     }
 });
 

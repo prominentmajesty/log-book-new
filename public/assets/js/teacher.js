@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    'use strict';
     $(function () {
         $('input, select').on('focus', function () {
             $(this).parent().find('.input-group-text').css('border-color', '#80bdff');
@@ -34,7 +35,7 @@ $(document).ready(function(){
     
     //var for Curse Adviser Input Fields
     const  email_curs_adviser = document.getElementById('email_curs_adviser')
-    const  password_curs_adviser = document.getElementById('password_curs_adviser');
+    const  password_curs_adviser = document.getElementById('password_curs_adviser'); 
     
     // var for Admin Input Fields
     const email_admin = document.getElementById('email_admin');
@@ -49,6 +50,8 @@ $(document).ready(function(){
     var college = document.getElementById('college');
     var department = document.getElementById('department');
     var date = document.getElementById('datepicker');
+    var spiner_adviser = document.getElementById('spiner_adviser');
+    var spiner_admin = document.getElementById('spiner_admin');
 
     //submit buttons
     var curse_adviser_submit = document.getElementById('curse_adviser_submit_btn');
@@ -60,6 +63,8 @@ $(document).ready(function(){
     qualified_students.style.display = 'none';
     field_div.style.display = 'none';
     alert_role.style.display = 'none';
+    spiner_adviser.style.display = 'none';
+    spiner_admin.style.display = 'none';
 
     btn_admin_navigator.addEventListener('click', () => {
         f_admin.style.display = 'none';
@@ -92,7 +97,7 @@ $(document).ready(function(){
             } 
         });
     }
-    college.addEventListener('change', (event) =>{
+    college.addEventListener('change', (event) =>{ 
         loadDepartment(event.target.value);
     });
     // Regex for validation(STOP HACKING AND CATCH THE HACKER); user strict
@@ -483,6 +488,85 @@ $(document).ready(function(){
         }
     }
 
+    function load_admin_to_server(){
+        admin_submit_btn.setAttribute('disabled', 'disabled');
+        admin_submit_btn.textContent = '' 
+        spiner_admin.style.display = 'block';
+        admin_submit_btn.textContent = 'authenticating...';
+        setTimeout( () => {
+            $.ajax({
+                method : 'POST',
+                url : '/admin/loginAdmin',
+                dataType : 'json',
+                data : {
+                    email : admin_login_form.email.value,
+                    password : admin_login_form.password.value
+                },
+                statusCode : {
+                    404 : function(msg, status, jqXHR){
+                        console.log(status);
+                    },
+                    501 : (msg, status,jqXHR) => {
+                        console.log(status);
+                    }, 
+                    200 : function(msg, status, jqXHR){
+                        console.log(status);
+                    }
+                }  
+            }).done((msg,status, jqXHR) => {
+                console.log(jqXHR);
+                console.log(msg); 
+                setTimeout(() => {
+                    spiner_admin.style.display = 'none';
+                },4000);
+                const url = `/admin/${jqXHR.responseJSON.user._id}/admin_dashboard`;
+                window.location.href = url;
+            }).fail((msg,jqXHR,status) => {
+                admin_submit_btn.textConten = '';    
+                admin_submit_btn.removeAttribute('disabled');
+                admin_submit_btn.textContent = 'Log in with your credentials';
+                spiner_admin.style.display = 'none';
+                admin_restrictor_alert.textContent = msg.responseJSON.msg;
+                admin_restrictor_alert.style.display = 'block';
+                setTimeout(() => {
+                    admin_restrictor_alert.style.display = 'none';
+                    admin_restrictor_alert.textContent = '';
+                },12000); 
+                console.log(msg.responseJSON.msg);      
+            });
+        },5000);
+        
+    }
+    
+    function load_adviser_to_server(){
+        $.ajax({
+            method : 'POST',
+            url : '/teacher/loginTeacher',
+            dataType : 'json',
+            data : {
+                email : curse_adviser_login_form.email.value,
+                password : curse_adviser_login_form.password.value
+            },
+            statusCode : {
+                404 : function(msg, status, jqXHR){
+                    console.log(status);
+                },
+                501 : function(msg, status, jqXHR){
+                    console.log(status);
+                },
+                200 : function(msg, status, jqXHR){
+                    console.log(status);
+                }
+            }
+        }).done(function(msg, status, jqXHR){
+            //console.log(msg);
+            console.log(jqXHR);
+            //console.log('Logged in succesful..');
+        }).fail(function(msg, status, jqXHR){
+            console.log(msg.responseJSON.msg);
+        });
+    }
+
     qualified_student_form.addEventListener('submit', function(e){
         e.preventDefault();
         if(first_name_not_empty() && last_name_not_empty() && email_not_empty() && reg_number_not_empty() && phone_number_not_empty() && college_not_empty() && department_not_empty() && date_not_empty()){
@@ -496,14 +580,14 @@ $(document).ready(function(){
     curse_adviser_login_form.addEventListener('submit', (e) => {
         e.preventDefault();
         if(check_dviser_empty_email() && check_adviser_empty_password()){
-            alert('Hey I worked');
+            load_adviser_to_server();
         }
     });
 
     admin_login_form.addEventListener('submit', (e__)=> {
         e__.preventDefault();
         if(check_admin_empty_email() && check_admin_password_empty()){
-            alert('Yea You Are Set To Logg in')
+            load_admin_to_server();
         }
     });
 });

@@ -1,10 +1,12 @@
 var express = require('express');
 const bcrypt = require('bcrypt');
 const Adviser_db = require('../models/adviser_');
+const passport = require('passport');
 
 var router = express.Router();
 
 router.get('/teacher', function(req, res){
+    console.log(req.user);
     res.render('teacher', {
         title : 'Adviser Page',
         style : 'teacher.css',
@@ -38,12 +40,14 @@ router.post('/teacher_post', (req, res) => {
                         return console.log(err);
                     }
                     
+                    var status_match = 'adviser'
                     const adviser_db = new Adviser_db({
                         email : email,
                         password : hash,
-                        name : name
+                        name : name,
+                        status : status_match
                     });
-
+                     
                     adviser_db.save().then((doc_) => {
                         console.log(`Adviser's Document Saved Successfuly !! Details : ${doc_}`);
                             res.status(200)
@@ -63,5 +67,27 @@ router.post('/teacher_post', (req, res) => {
     });
 
 });
+
+router.post('/loginTeacher', (req, res, next) =>{
+    console.log(req.body.email);
+    passport.authenticate('local', function(err, user, info){
+        if(err){
+            return next(err);
+        } 
+        if(!user){
+            return res.status(404).json({msg :info.message}); 
+        }
+        req.logIn(user, (err) => {
+            if(err){
+                return console.log(err);
+            }
+            res.status(200).json({
+                msg : 'User Logged In',
+                user
+            })
+        });
+    })(req, res, next); 
+});
+
 
 module.exports = router;
