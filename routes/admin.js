@@ -7,18 +7,23 @@ const router = express.Router();
 
 router.get('/:id/admin_dashboard', (req, res) => {
     console.log(req.user);
-    Admin_db.find({_id : req.params.id}).then((admin) =>{
-        res.render('admin_dashboard', {
-            title : 'Admin_Dashboard',
-            style  : 'admin_dashboard.css',
-            script : 'admin_dashboard.js',
-            admin
+    const cast = "admin";
+    if(req.user && req.user.status === cast){
+        Admin_db.find({_id : req.params.id}).then((admin) =>{
+            res.render('admin_dashboard', {
+                title : 'Admin_Dashboard',
+                style  : 'admin_dashboard.css',
+                script : 'admin_dashboard.js',
+                admin
+            });
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(501).send(e);
         });
-    })
-    .catch((e) => {
-        console.log(e);
-        res.status(501).send(e);
-    });
+    }else{
+        res.redirect('/teacher/teacher');
+    }
 });
 
 router.post('/admin_post', function(req, res){

@@ -1,6 +1,16 @@
 var mongoose = require('mongoose');
 
 var student_Schema = mongoose.Schema({
+   
+    first_name :{
+        type : String,
+        required : true
+    },
+
+    last_name : {
+        type : String,
+        required : true
+    },
 
     email : {
         type : String, 
@@ -12,7 +22,7 @@ var student_Schema = mongoose.Schema({
         require : true
     },
 
-    name :{
+    phone_number : {
         type : String,
         required : true
     },
@@ -27,19 +37,9 @@ var student_Schema = mongoose.Schema({
         required : true
     },
 
-    year_of_admission : {
+   date_of_siwes : {
         type : String,
-        required : true
-    },
-
-    year_of_graduation : {
-        type : String,
-        required : true
-    },
-
-    date_of_submission : {
-        type : String, 
-        required : true
+        required :true
     },
 
     approved : {
@@ -51,7 +51,6 @@ var student_Schema = mongoose.Schema({
        type : String,
        required : true
    }
-
 });
 
 module.exports = Student_db = mongoose.model('Student_db', student_Schema);

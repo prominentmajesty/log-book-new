@@ -9,8 +9,9 @@ $(document).ready(function(){
         });
     });
 
+    var user
     //Alert variable for qualified student form
-    var alert_role = document.getElementById('alert_role');
+    var alert_role = document.getElementById('alert_role'); 
     var field_div = document.getElementById('field_div');
 
     //Alert variable for Curs-Adviser loggin form
@@ -50,6 +51,8 @@ $(document).ready(function(){
     var college = document.getElementById('college');
     var department = document.getElementById('department');
     var date = document.getElementById('datepicker');
+    
+    // spiners
     var spiner_adviser = document.getElementById('spiner_adviser');
     var spiner_admin = document.getElementById('spiner_admin');
 
@@ -58,7 +61,6 @@ $(document).ready(function(){
     var admin_submit_btn = document.getElementById('admin_submit_btn');
     var qualified_student_submit_btn = document.getElementById('qualified_student_submit_btn');
 
-    f_curse_adviser.style.display = 'block';
     f_admin.style.display = 'none';
     qualified_students.style.display = 'none';
     field_div.style.display = 'none';
@@ -518,9 +520,13 @@ $(document).ready(function(){
                 console.log(msg); 
                 setTimeout(() => {
                     spiner_admin.style.display = 'none';
+                    admin_submit_btn.textContent = 'Log in with your credentials';
                 },4000);
                 const url = `/admin/${jqXHR.responseJSON.user._id}/admin_dashboard`;
                 window.location.href = url;
+                email_admin.value = '';
+                password_admin.value = '';
+                admin_submit_btn.removeAttribute('disabled');
             }).fail((msg,jqXHR,status) => {
                 admin_submit_btn.textConten = '';    
                 admin_submit_btn.removeAttribute('disabled');
@@ -532,26 +538,87 @@ $(document).ready(function(){
                     admin_restrictor_alert.style.display = 'none';
                     admin_restrictor_alert.textContent = '';
                 },12000); 
-                console.log(msg.responseJSON.msg);      
+                console.log(msg.responseJSON.msg);   
             });
         },5000);
         
     }
     
     function load_adviser_to_server(){
+        curse_adviser_submit.setAttribute('disabled', 'disabled');
+        curse_adviser_submit.textContent = '';
+        curse_adviser_submit.textContent = 'authenticating...';
+        spiner_adviser.style.display = 'block';
+        setTimeout( () => {
+            $.ajax({
+                method : 'POST',
+                url : '/teacher/loginTeacher',
+                dataType : 'json',
+                data : {
+                    email : curse_adviser_login_form.email.value,
+                    password : curse_adviser_login_form.password.value
+                },
+                statusCode : {
+                    404 : function(msg, status, jqXHR){
+                        console.log(status); 
+                    },
+                    501 : function(msg, status, jqXHR){
+                        console.log(status);
+                    },
+                    200 : function(msg, status, jqXHR){
+                        console.log(status);
+                    }
+                }
+            }).done(function(msg, status, jqXHR){
+                user = jqXHR.responseJSON.user._id;
+                f_curse_adviser.style.display = 'none';
+                spiner_adviser.style.display = 'none';
+                curse_adviser_submit.textContent = '';
+                curse_adviser_submit.textContent = 'Log in with your credentials';
+                curse_adviser_submit.removeAttribute('disabled');
+                email_curs_adviser.value = '';
+                password_curs_adviser.value = '';
+                qualified_students.style.display = 'block';
+                //console.log(msg);
+                console.log(jqXHR);
+                //console.log('Logged in succesful..');
+            }).fail(function(msg, status, jqXHR){
+                console.log(jqXHR);
+                spiner_adviser.style.display = 'none';
+                curse_adviser_submit.textContent = '';
+                curse_adviser_submit.textContent = 'Log in with your credentials';
+                curse_adviser_submit.removeAttribute('disabled');
+                adviser_restrictor_alert.textContent = msg.responseJSON.msg;
+                adviser_restrictor_alert.style.display = 'block';
+                setTimeout(()=>{
+                    adviser_restrictor_alert.style.display = 'none';
+                    adviser_restrictor_alert.textContent = '';
+                },12000);
+            });
+        },5000);
+    }
+
+     function server_post_request(){
         $.ajax({
             method : 'POST',
-            url : '/teacher/loginTeacher',
+            url : '/teacher/post_qualified_students',
             dataType : 'json',
             data : {
-                email : curse_adviser_login_form.email.value,
-                password : curse_adviser_login_form.password.value
-            },
+                first_name : qualified_student_form['student_first_name'].value,
+                last_name : qualified_student_form['student_last_name'].value,
+                email : qualified_student_form['student_email'].value,
+                reg_number : qualified_student_form['student_reg_number'].value,
+                phone_number : qualified_student_form['student_phone_number'].value,
+                college : qualified_student_form['college'].value,
+                department : qualified_student_form['department'].value,
+                date_of_siwes : qualified_student_form['datepicker'].value
+            }, 
+
             statusCode : {
-                404 : function(msg, status, jqXHR){
+                500 : function(msg, status, jqXHR){
                     console.log(status);
                 },
-                501 : function(msg, status, jqXHR){
+                400 : function(msg, status, jqXHR){
                     console.log(status);
                 },
                 200 : function(msg, status, jqXHR){
@@ -559,26 +626,40 @@ $(document).ready(function(){
                 }
             }
         }).done(function(msg, status, jqXHR){
-            //console.log(msg);
+            alert_role.style.display = 'none';
+            alert_role.textContent = '';
             console.log(jqXHR);
-            //console.log('Logged in succesful..');
-        }).fail(function(msg, status, jqXHR){
+            alert(jqXHR.responseJSON.msg);
+            const get_Field =  document.querySelectorAll('.form-control');
+            for (var i__ = 0; i__ < get_Field.length; i__++){
+                get_Field[i__].classList.remove('is-valid');
+                get_Field[i__].classList.remove('in-invalid');
+                get_Field[i__].value = '';
+            }
+
+        }).fail(function(msg, jqXHR){
             console.log(msg.responseJSON.msg);
+            student_email.classList.remove('is-valid');
+            student_email.classList.add('is-invalid');
+            alert_role.textContent = msg.responseJSON.msg;
+            alert_role.style.display = 'block';
+            setTimeout(function(){
+                alert_role.style.display = 'none';
+                alert_role.textContent = '';
+            },11000)
         });
     }
-
     qualified_student_form.addEventListener('submit', function(e){
         e.preventDefault();
         if(first_name_not_empty() && last_name_not_empty() && email_not_empty() && reg_number_not_empty() && phone_number_not_empty() && college_not_empty() && department_not_empty() && date_not_empty()){
             if(validate_first_name() && validata_last_name() && validate_student_email() && validate_reg_number() && validate_phone_number()){
-                alert('Hey man That Me');
+                server_post_request();
             }
         }
-
     });
 
-    curse_adviser_login_form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    curse_adviser_login_form.addEventListener('submit', (__e) => {
+        __e.preventDefault();
         if(check_dviser_empty_email() && check_adviser_empty_password()){
             load_adviser_to_server();
         }
@@ -589,5 +670,32 @@ $(document).ready(function(){
         if(check_admin_empty_email() && check_admin_password_empty()){
             load_admin_to_server();
         }
+    });
+
+    f_curse_adviser.style.display = 'block';
+    $.ajax({
+        method : 'GET',
+        url : '/teacher/refresh_page'
+    }).done((jqXHR, status)=>{
+        f_curse_adviser.style.display = 'none'
+        qualified_students.style.display = 'block';
+    }).fail((jqXHR, status) => {
+        qualified_students.style.display = 'none';
+        f_curse_adviser.style.display = 'block';
+    });
+
+    document.getElementById('student_close_form').addEventListener('click', function(e){
+        e.preventDefault();
+        $.ajax({
+            method : 'GET',
+            url : '/teacher/logout'
+        }).done((jqXHR, status) => {
+            console.log(jqXHR);
+            console.log('Log out sccesfully');
+            qualified_students.style.display = 'none';
+            f_curse_adviser.style.display = 'block';
+        }).fail((jqXHR, statusCode)=>{
+            console.log(jqXHR);
+        });
     });
 });
