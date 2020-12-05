@@ -39,7 +39,7 @@ router.post('/teacher_post', (req, res) => {
         else
         {
             bcrypt.genSalt(10, (err, salt_round) => {
-                if(err){
+                if(err){ 
                     return console.log(err);
                 }
 
@@ -73,7 +73,6 @@ router.post('/teacher_post', (req, res) => {
         }
 
     });
-
 });
 
 router.post('/post_qualified_students', function(req, res){
@@ -82,6 +81,7 @@ router.post('/post_qualified_students', function(req, res){
         const last_name = req.body.last_name;
         const email = req.body.email;
         const reg_number = req.body.reg_number;
+        const mat_number = req.body.reg_number;
         const phone_number = req.body.phone_number;
         const college = req.body.college;
         const department = req.body.department;
@@ -108,6 +108,7 @@ router.post('/post_qualified_students', function(req, res){
                         last_name : last_name,
                         email : email,
                         reg_number : hashed,
+                        mat_number : reg_number,
                         phone_number : phone_number,
                         college : college,
                         department : department,
@@ -115,7 +116,7 @@ router.post('/post_qualified_students', function(req, res){
                         status : status
                     });
                     student_db.save().then((data)=>{
-                        res.status(200).json({msg : `${data.email} has successfuly been registerd`});
+                        res.status(200).json({msg : `${data.email} with ${data._id} has successfuly been registerd`});
                     }).catch((err) => {
                         console.log(err);
                     });

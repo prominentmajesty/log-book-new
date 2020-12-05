@@ -1,0 +1,7 @@
+.perent_display{
+    margin-left: 50px;
+    margin-top : 35px 
+}
+.perent_display > .row{
+    margin-top: 20px;
+}

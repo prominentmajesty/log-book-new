@@ -1,7 +1,7 @@
 const LocalStrategy =  require('passport-local').Strategy;
 const Admin_db = require('../models/admin_');
 const Adviser_db = require('../models/adviser_');
-const Student_Access = require('../models/student_access')
+const Student_Access = require('../models/student_access');
 const bcrypt = require('bcrypt');
 
 module.exports = function(passport){
@@ -24,13 +24,13 @@ module.exports = function(passport){
                     bcrypt.compare(password, user.password, (err, password_matched) =>{
                         if(err) throw err;
                         if(password_matched){
-                            return done(null, user);
+                            return done(null, user); 
                         }else{
                             return done(null, false, {message: 'authentication failed !! incorrect password'});
                         }
                     });
-
-                });
+                            
+                }); 
             }else{
                 bcrypt.compare(password, user.password, (err, password_matched)=>{
                     if(err) throw err;
@@ -44,7 +44,7 @@ module.exports = function(passport){
             }
             
         });
-    }
+    } 
     ));
 
     passport.serializeUser(function(user, done){
@@ -62,3 +62,4 @@ module.exports = function(passport){
         });
     });
 }
+ 

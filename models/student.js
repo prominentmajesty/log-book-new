@@ -22,6 +22,11 @@ var student_Schema = mongoose.Schema({
         require : true
     },
 
+    mat_number : {
+        type : String,
+        require : true
+    },
+
     phone_number : {
         type : String,
         required : true
