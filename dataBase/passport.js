@@ -16,20 +16,36 @@ module.exports = function(passport){
             if(!user){ 
                 Adviser_db.findOne({email : email}, (err, user)=>{
                     if(err){
-                        return done(err);
+                        return done(err); 
+                    } 
+                    if(!user){  
+                        Student_Access.findOne({email : email}, (err, user) => {
+                            if(err){ 
+                                return done(err);
+                            }
+                            if(!user){
+                                return done(null, false, {message: 'authentication failed !! incorrect username'});
+                            }else{
+                                bcrypt.compare(password, user.reg_number, (err, password_matched) =>{
+                                    if(err) throw err;
+                                    if(password_matched){
+                                        return done(null, user); 
+                                    }else{
+                                        return done(null, false, {message: 'authentication failed !! incorrect password'});
+                                    }
+                                });
+                            }
+                        })
+                    }else{
+                        bcrypt.compare(password, user.password, (err, password_matched) => {
+                            if(err) throw err;
+                            if(password_matched){
+                                return done(null, user);
+                            }else{
+                                return done(null, false, {message : 'authentication failed !! incorrect password'});
+                            }
+                        })
                     }
-                    if(!user){
-                        return done(null, false, {message: 'authentication failed !! incorrect username'});
-                    }
-                    bcrypt.compare(password, user.password, (err, password_matched) =>{
-                        if(err) throw err;
-                        if(password_matched){
-                            return done(null, user); 
-                        }else{
-                            return done(null, false, {message: 'authentication failed !! incorrect password'});
-                        }
-                    });
-                            
                 }); 
             }else{
                 bcrypt.compare(password, user.password, (err, password_matched)=>{
@@ -42,10 +58,8 @@ module.exports = function(passport){
                     }
                 });
             }
-            
         });
-    } 
-    ));
+    }));
 
     passport.serializeUser(function(user, done){
         done(null,user.id);
@@ -54,7 +68,13 @@ module.exports = function(passport){
         Admin_db.findById(id, function(err,user){
             if(!user){
                 Adviser_db.findById(id, function(err, user){
-                    done(err, user);
+                    if(!user){
+                        Student_Access.findById(id, (err, user)=>{
+                            done(err, user);
+                        })
+                    }else{
+                        done(err, user);
+                    }
                 });
             }else{
                 done(err,user);

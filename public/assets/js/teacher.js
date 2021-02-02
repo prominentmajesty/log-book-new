@@ -109,7 +109,6 @@ $(document).ready(function(){
     var regex_ForEmail_Addres = /^([a-z\d]{2,})@([a-z]{2,7})\.([a-z]{2,3})(\.[a-z]{2,3})?/;
     var regex_ForCard_Number = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
     var regex_For_Expiring_Date = /^(0[1-9]|1[0-2]|[1-9])\/(1[4-9]|[2-9][0-9]|20[1-9][1-9])$/;
-    var Regex_Card_Code = /^[0-9]{3}$/;
 
     function check_dviser_empty_email(){
         if(email_curs_adviser.value === '' || email_curs_adviser.value.trim() === ''){
@@ -503,7 +502,7 @@ $(document).ready(function(){
                 data : {
                     email : admin_login_form.email.value,
                     password : admin_login_form.password.value
-                },
+                }, 
                 statusCode : {
                     404 : function(msg, status, jqXHR){
                         console.log(status);
@@ -514,7 +513,7 @@ $(document).ready(function(){
                     200 : function(msg, status, jqXHR){
                         console.log(status);
                     }
-                }  
+                }
             }).done((msg,status, jqXHR) => {
                 console.log(jqXHR);
                 console.log(msg); 

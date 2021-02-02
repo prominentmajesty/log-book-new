@@ -30,7 +30,7 @@ router.post('/teacher_post', (req, res) => {
     Adviser_db.findOne({email : email}, (err, return_email) => {
         if(err){
            console.log(err);
-        }
+        }  
         else if(return_email){
             console.log(`Email ${return_email.email} already exist`);
                 res.status(201)

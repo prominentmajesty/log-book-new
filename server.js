@@ -35,7 +35,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({extended :false}));
+app.use(bodyparser.urlencoded({extended :false}));                                        
 
 app.use(cookie_session({
     maxAge : 24 * 60 * 1000,
