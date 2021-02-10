@@ -189,5 +189,18 @@ $(document).ready(function(){
              alert(''+toUnicodeVariant('SUBMISSION FAILED!!','bold sans')+' '+toUnicodeVariant(jqXHR.responseJSON.err_msg,'sans')+'')
          })
     });
+
+    document.querySelector('.user_logout').addEventListener('click', function(){
+        $.ajax({
+            method : 'GET',
+            url : '/users/logout'
+        }).done((jqXHR, status) => {
+            window.location.href = '/';
+            console.log(jqXHR);
+        }).fail((jqXHR, statusCode)=>{
+            window.location.href = '/';
+            console.log(jqXHR);
+        });
+    })
 });
 

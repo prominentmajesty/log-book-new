@@ -15,12 +15,15 @@ router.get('/user_login', function(req, res){
 router.get('/users', (req, res) => {
     const user = req.user
     console.log(user)
-    res.render('users', {
+    user ?
+        res.render('users', {
         title : 'Dashboard',
         style : 'users.css',
         script : 'users.js',
         user
-    });
+        })
+    : 
+        res.redirect('/');     
 }); 
 
 router.post('/log_book_arrays', (req, res)=> {
@@ -113,11 +116,12 @@ router.post('/user_login', (req, res, next) => {
             console.log(user);       
            return res.status(200).json({msg : 'User successfuly logged in', user});
         })
-    })(req, res, next);
+    })(req, res, next); 
 })
 
 router.get('/logout', (req, res) => {
     req.logOut();
-    res.status(200).json({msg : 'You are logged out now'});
-});
+    req.user === undefined ? res.status(200).json({msg : 'You are logged out now'}) 
+        : res.status(501).json({msg : 'Logout failed !!'});
+}); 
 module.exports = router;
